@@ -23,7 +23,7 @@ $ pipenv shell
 These commands need to be run only once. They create the database structure, scrap the data and save it to the database:
 
 ```console
-$ python manage.py migrtae
+$ python manage.py migrate
 $ python manage.py crawl
 ```
 
