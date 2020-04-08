@@ -1,4 +1,4 @@
-# Ariadne
+# Fio de Ariadne
 
 This is a proof-of-concept of a system to scrap and structure data about minors in Brazil. Ariadne requires [Python](https://python.org) 3.7+ and [Poetry](https://python-poetry.org/).
 
@@ -17,6 +17,14 @@ $ poetry shell
 ```
 
 (Use `exit` to leave the _virtualenv_.)
+
+### Configuring the Django application
+
+Simply run this command and follow the instructions:
+
+```console
+$ createnv
+```
 
 ### Loading data
 

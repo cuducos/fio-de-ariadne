@@ -17,6 +17,7 @@ scrapy = "^2.0.1"
 whitenoise = {extras = ["brotli"], version = "^5.0.1"}
 
 [tool.poetry.dev-dependencies]
+createnv = "^0.0.1"
 ipython = "^7.13.0"
 mypy = "^0.770"
 
