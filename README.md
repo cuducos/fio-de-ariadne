@@ -1,19 +1,19 @@
 # Ariadne
 
-This is a proof-of-concept of a system to scrap and structure data about minors in Brazil. Ariadne requires [Python](https://python.org) 3.7+ and [Pipenv](https://pipenv.readthedocs.io/en/latest/).
+This is a proof-of-concept of a system to scrap and structure data about minors in Brazil. Ariadne requires [Python](https://python.org) 3.7+ and [Poetry](https://python-poetry.org/).
 
 ## Running
 
 ### Install the dependencies
 
 ```console
-$ pipenv install
+$ poetry install
 ```
 
 To use the dependencies installed you need to activate the _virtualenv_ with:
 
 ```console
-$ pipenv shell
+$ poetry shell
 ```
 
 (Use `exit` to leave the _virtualenv_.)
@@ -43,14 +43,9 @@ And access the dashboard at [`localhost:8000`](http://localhost:8000).
 
 ## Developing
 
-You can install extra dependencies with:
-```consle
-$ pip install --dev
-```
-
-And run some checkers with:
+You can run some checks with:
 
 ```console
-$ pipenv run mypy crawler
-$ pipenv run black .
+$ mypy crawler
+$ black .
 ```

@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "fio-de-ariadne"
+version = "0.0.1"
+description = "Banco de dados estruturado de crianças desaparecidas no Brasil"
+authors = ["Eduardo Cuducos <cuducos@users.noreply.github.com>"]
+license = "GPL-3.0"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+dj_database_url = "^0.5.0"
+django = "^3.0.5"
+django-extensions = "^2.2.9"
+gunicorn = "^20.0.4"
+psycopg2-binary = "^2.8.5"
+python-decouple = "^3.3"
+scrapy = "^2.0.1"
+whitenoise = {extras = ["brotli"], version = "^5.0.1"}
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.13.0"
+mypy = "^0.770"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
