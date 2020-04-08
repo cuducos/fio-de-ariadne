@@ -1,7 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from datetime import date, datetime
 from re import findall
-from typing import Callable, List, Optional
+from typing import Iterable, List, Optional
 
 from crawler.cast import to_color, to_date
 from crawler.typing import Cast, FieldValue
@@ -14,7 +13,7 @@ class Parser(metaclass=ABCMeta):
         self.tokens = set(label.lower() for label in self.labels)
 
     @abstractmethod
-    def parse(self, text: List[str]) -> str:
+    def parse(self, text: Iterable[str]) -> str:
         pass
 
     def cast(self, value: str) -> FieldValue:
@@ -29,13 +28,13 @@ class Parser(metaclass=ABCMeta):
     def __str__(self) -> str:
         return f"{self.__class__.__name__}({self.labels})"
 
-    def __call__(self, text: List[str]) -> FieldValue:
+    def __call__(self, text: Iterable[str]) -> FieldValue:
         output = self.parse(text)
         return self.cast(output)
 
 
 class WeakParser(Parser):
-    def parse(self, text: List[str]) -> str:
+    def parse(self, text: Iterable[str]) -> str:
         for line in text:
             words = set(word.lower() for word in findall(r"\w+", line))
             if self.tokens & words:
@@ -45,7 +44,7 @@ class WeakParser(Parser):
 
 
 class ExactParser(Parser):
-    def parse(self, text: List[str]) -> str:
+    def parse(self, text: Iterable[str]) -> str:
         for label in self.labels:
             label = f"{label}:"
             for line in text:
