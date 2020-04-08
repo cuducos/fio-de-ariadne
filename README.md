@@ -1,57 +1,55 @@
 # Fio de Ariadne
 
-This is a proof-of-concept of a system to scrap and structure data about minors in Brazil. Ariadne requires [Python](https://python.org) 3.7+ and [Poetry](https://python-poetry.org/).
+Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requsitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
 
-## Running
-
-### Install the dependencies
+## Instalando as dependêndias
 
 ```console
 $ poetry install
 ```
 
-To use the dependencies installed you need to activate the _virtualenv_ with:
+Para utilizar as dependências, você precisa _entrar_ no _cirtualenv_ que o Poetry criou:
 
 ```console
 $ poetry shell
 ```
 
-(Use `exit` to leave the _virtualenv_.)
+Use `exit` para sair do _virtualenv_ quando desejar.
 
-### Configuring the Django application
+## Configurando a aplicação feita em Django
 
-Simply run this command and follow the instructions:
+Execute esse comando e siga as instruções:
 
 ```console
 $ createnv
 ```
 
-### Loading data
+## Raspando os dados
 
-These commands need to be run only once. They create the database structure, scrap the data and save it to the database:
+Esses comandos só precisam ser executados uma única vez. Eles criam a estrutura do banco de dados, raspam os dados e salvam tudo nesse banco:
 
 ```console
 $ python manage.py migrate
 $ python manage.py crawl
 ```
 
-You also might need to create an user to access the dashboard:
+Você pode ainda criar um usuário para acessar o painel de controle:
 
 ```console
 $ python manage.py createsuperuser
 ```
 
-## Running
+## Iniciando a aplicação web
+
+Utilize esse comando e depois acesse [`localhost:8000`](http://localhost:8000):
 
 ```console
 $ python manage.py runserver
 ```
 
-And access the dashboard at [`localhost:8000`](http://localhost:8000).
+## Contribuindo
 
-## Developing
-
-You can run some checks with:
+Você pode contribuir com melhorias no código e utilizar algumas verificações de qualidade:
 
 ```console
 $ mypy crawler
