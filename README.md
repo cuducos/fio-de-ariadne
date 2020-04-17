@@ -1,3 +1,5 @@
+![Fio de Ariadne](imgs/fio-de-ariadne.jpg)
+
 # Fio de Ariadne
 
 Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requsitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
@@ -48,6 +50,8 @@ $ python manage.py runserver
 ```
 
 ## Contribuindo
+
+![Precisamos de ajuda](imgs/fio-de-ariadne-precisa-de-ajuda.jpg)
 
 Você pode contribuir com melhorias no código e utilizar algumas verificações de qualidade:
 
