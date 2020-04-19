@@ -2,7 +2,7 @@
 
 # Fio de Ariadne
 
-Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requsitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
+Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requisitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
 
 ## Instalando as dependêndias
 
@@ -10,7 +10,7 @@ Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de 
 $ poetry install
 ```
 
-Para utilizar as dependências, você precisa _entrar_ no _cirtualenv_ que o Poetry criou:
+Para utilizar as dependências, você precisa _entrar_ no _virtualenv_ que o Poetry criou:
 
 ```console
 $ poetry shell
