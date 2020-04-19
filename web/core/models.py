@@ -1,4 +1,11 @@
-from django.db.models import CharField, DateField, Model, TextField, URLField
+from django.db.models import (
+    CharField,
+    DateField,
+    Model,
+    TextField,
+    URLField,
+    IntegerField,
+)
 
 
 class Kid(Model):
@@ -29,7 +36,11 @@ class Kid(Model):
     last_seen_at = CharField(
         "Local onde foi vista(o) pela última vez", max_length=255, null=True, blank=True
     )
+    age_at_occurrence = IntegerField("Idade quando desapareceu", null=True, blank=True)
 
     class Meta:
         verbose_name = "criança"
         ordering = ("name",)
+
+    def __str__(self):
+        return self.name

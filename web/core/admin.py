@@ -15,6 +15,14 @@ class KidModelAdmin(admin.ModelAdmin):
         "hair",
         "skin",
         "last_seen_at",
+        "age_at_occurrence",
+    )
+    list_filter = (
+        "eyes",
+        "hair",
+        "skin",
+        "last_seen_at",
+        "age_at_occurrence",
     )
 
     def original(self, obj):
