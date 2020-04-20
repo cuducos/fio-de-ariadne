@@ -49,6 +49,21 @@ Utilize esse comando e depois acesse [`localhost:8000`](http://localhost:8000):
 $ python manage.py runserver
 ```
 
+### API web
+
+#### `GET /api/kid`
+
+Lista as crianças do nosso banco de dados.
+
+Aceita como parâmetro de busca (busca exata) parâmetros de URL com os nomes dos campos do modelo `web.core.models.Kid`.
+
+##### Exemplo
+
+`GET /api/kid?eyes=Pretos&hair=Castanho escuro` lista apenas as crianças:
+
+* cujo campo `eyes` tenha o valor exato (_case-sensitive_, inclusive) `"Pretos"`
+* **e** cujo campo `hair` tenha o valor exato (_case-sensitive_, inclsuive) `"Castanho escuro"`
+
 ## Contribuindo
 
 ![Precisamos de ajuda](imgs/fio-de-ariadne-precisa-de-ajuda.jpg)
@@ -56,6 +71,7 @@ $ python manage.py runserver
 Você pode contribuir com melhorias no código e utilizar algumas verificações de qualidade:
 
 ```console
+$ pytest
 $ mypy crawler
 $ black .
 ```
