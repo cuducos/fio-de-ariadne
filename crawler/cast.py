@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from re import findall, sub
+from re import findall, sub, match
 from typing import Optional
 
 
@@ -26,3 +26,8 @@ def to_date(value: str) -> Optional[date]:
         return datetime.strptime(value, "%d/%m/%Y").date()
     except ValueError:
         return None
+
+
+def to_age(value: str) -> Optional[int]:
+    matches = match(r"\d{1,2}", value)
+    return int(matches.group(0)) if matches else None

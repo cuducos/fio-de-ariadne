@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from re import findall
 from typing import Iterable, List, Optional
 
-from crawler.cast import to_color, to_date
+from crawler.cast import to_age, to_color, to_date
 from crawler.typing import Cast, FieldValue
 
 
@@ -64,6 +64,9 @@ PARSERS = {
     "father": ExactParser(["Pai", "Nome do Pai"]),
     "missing_since": ExactParser(["Desap.", "Data do desaparecimento"], cast=to_date),
     "last_seen_at": ExactParser(["Local", "Local do desaparecimento"]),
+    "age_at_occurrence": ExactParser(
+        ["Idade", "Idade na data do Desaparecimento"], cast=to_age
+    ),
     "eyes": WeakParser(["olho", "olhos"], cast=to_color),
     "hair": WeakParser(["cabelo", "cabelos"], cast=to_color),
     "skin": WeakParser(["pele"], cast=to_color),
