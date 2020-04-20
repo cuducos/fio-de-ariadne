@@ -8,6 +8,7 @@ class Case(Item):
     mother = Field()
     father = Field()
     missing_since = Field()
+    age_at_occurrence = Field()
     last_seen_at = Field()
     eyes = Field()
     hair = Field()

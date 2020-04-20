@@ -39,6 +39,18 @@ class ParanaSpider(Spider):
             )
 
             kwargs = {name: parser(contents) for name, parser in PARSERS.items()}
+
+            if (
+                kwargs["age_at_occurrence"] is None
+                and kwargs["dob"] is not None
+                and kwargs["missing_since"] is not None
+            ):
+                dob = datetime.strptime(str(kwargs["dob"]), "%Y-%m-%d")
+                missing_since = datetime.strptime(
+                    str(kwargs["missing_since"]), "%Y-%m-%d"
+                )
+                kwargs["age_at_occurrence"] = missing_since.year - dob.year
+
             yield Case(
                 name=name,
                 url=response.urljoin(href),
