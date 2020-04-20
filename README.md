@@ -4,7 +4,7 @@
 
 Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requisitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
 
-## Instalando as dependêndias
+## Instalando as dependências
 
 ```console
 $ poetry install
