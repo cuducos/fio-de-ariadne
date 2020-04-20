@@ -23,3 +23,6 @@ jobs:
           python_version: 3.7
           poetry_version: 1.0.5
           args: run pytest
+        env:
+          SECRET_KEY: my-secret
+          DATABASE_URL: "sqlite:///:memory:"

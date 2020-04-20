@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Iterator, Union
 
 from scrapy import Request, Spider
