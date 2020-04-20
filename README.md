@@ -1,6 +1,6 @@
 ![Fio de Ariadne](imgs/fio-de-ariadne.jpg)
 
-# Fio de Ariadne
+# Fio de Ariadne [![GitHub Actions: Tests](https://github.com/cuducos/fio-de-ariadne/workflows/Tests/badge.svg)]()
 
 Essa é uma _prova de conceito_ para um sistema de raspagem e estruturação de dados sobre crianças desaparecidas no Brasil. O _Fio de Ariadne_ tem como requisitos técnicos [Python](https://python.org) 3.7+ e [Poetry](https://python-poetry.org/).
 
@@ -71,7 +71,6 @@ Aceita como parâmetro de busca (busca exata) parâmetros de URL com os nomes do
 Você pode contribuir com melhorias no código e utilizar algumas verificações de qualidade:
 
 ```console
-$ pytest
 $ mypy crawler
-$ black .
+$ pytest
 ```

@@ -1,0 +1,25 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        uses: abatilo/actions-poetry@v1.5.0
+        with:
+          python_version: 3.7
+          poetry_version: 1.0.5
+          args: install
+      - name: Run mypy
+        uses: abatilo/actions-poetry@v1.5.0
+        with:
+          python_version: 3.7
+          poetry_version: 1.0.5
+          args: run mypy crawler
+      - name: Run tests
+        uses: abatilo/actions-poetry@v1.5.0
+        with:
+          python_version: 3.7
+          poetry_version: 1.0.5
+          args: run pytest

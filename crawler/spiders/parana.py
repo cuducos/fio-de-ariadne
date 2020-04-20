@@ -1,4 +1,3 @@
-from datetime import date, datetime
 from typing import Iterator, Union
 
 from scrapy import Request, Spider
@@ -6,7 +5,6 @@ from scrapy.http import Response
 
 from crawler.items import Case
 from crawler.text import PARSERS
-from crawler.typing import FieldValue
 
 
 class ParanaSpider(Spider):
