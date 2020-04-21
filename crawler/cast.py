@@ -6,10 +6,20 @@ from typing import Optional
 def to_color(text: str) -> str:
     mapping = {
         "castanho": "Castanhos",
+        "castanhos": "Castanhos",
         "azul": "Azul",
         "azuis": "Azul",
         "morena": "Morena",
         "moreno": "Morena",
+        "preto": "Preto",
+        "pretos": "Preto",
+        "loiros": "Loiro",
+        "loiro": "Loiro",
+        "ruivo": "Ruivo",
+        "ruiva": "Ruivo",
+        "ruivos": "Ruivo",
+        "branco": "Branca",
+        "branca": "Branca",
     }
 
     words = set(word.lower() for word in findall(r"\w+", text))

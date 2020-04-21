@@ -1,14 +1,27 @@
 from django.db.models import (
     CharField,
     DateField,
+    IntegerChoices,
+    IntegerField,
     Model,
     TextField,
     URLField,
-    IntegerField,
 )
+from django.utils.translation import gettext_lazy as _
 
 
 class Kid(Model):
+    class Color(IntegerChoices):
+        BLACK = 1, _("Preto")
+        BROWN = 2, _("Castanhos")
+        BLONDE = 3, _("Loiro")
+        RED = 4, _("Ruivo")
+        BLUE = (
+            5,
+            _("Azul"),
+        )
+        SWARTHY = 6, _("Morena")
+        WHITE = 7, _("Branca")
 
     # required fiels
     name = CharField("Nome", max_length=255, db_index=True, unique=True)
@@ -21,13 +34,28 @@ class Kid(Model):
         "Desaparecida(o) desde", null=True, blank=True, db_index=True
     )
     eyes = CharField(
-        "Cor dos olhos", max_length=255, null=True, blank=True, db_index=True
+        "Cor dos olhos",
+        max_length=50,
+        choices=Color.choices,
+        null=True,
+        blank=True,
+        db_index=True,
     )
     hair = CharField(
-        "Cor dos cabelos", max_length=255, null=True, blank=True, db_index=True
+        "Cor dos cabelos",
+        max_length=50,
+        choices=Color.choices,
+        null=True,
+        blank=True,
+        db_index=True,
     )
     skin = CharField(
-        "Cor da pele", max_length=255, null=True, blank=True, db_index=True
+        "Cor da pele",
+        max_length=50,
+        choices=Color.choices,
+        null=True,
+        blank=True,
+        db_index=True,
     )
 
     # optional fields

@@ -11,9 +11,9 @@ class KidModelAdmin(admin.ModelAdmin):
         "original",
         "dob",
         "missing_since",
-        "eyes",
-        "hair",
-        "skin",
+        "eyes_display",
+        "hair_display",
+        "skin_display",
         "last_seen_at",
         "age_at_occurrence",
     )
@@ -29,6 +29,19 @@ class KidModelAdmin(admin.ModelAdmin):
         label = "Ver link original"
         image = f'<img src="/static/admin/img/icon-viewlink.svg" alt="{label}">'
         return mark_safe(f'<a href="{obj.url}">{image}</a>')
+
+    def eyes_display(self, obj):
+        return obj.get_eyes_display()
+
+    def hair_display(self, obj):
+        return obj.get_hair_display()
+
+    def skin_display(self, obj):
+        return obj.get_skin_display()
+
+    eyes_display.short_description = "Cor dos olhos"
+    hair_display.short_description = "Cor dos cabelos"
+    skin_display.short_description = "Cor da pele"
 
 
 admin.site.register(Kid, KidModelAdmin)
