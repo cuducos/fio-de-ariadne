@@ -4,6 +4,7 @@ from typing import Iterator, Union
 from scrapy import Request, Spider
 from scrapy.http import Response
 
+from crawler.clients.ibge import APIClientIBGE
 from crawler.items import Case
 from crawler.text import PARSERS
 
@@ -11,6 +12,7 @@ from crawler.text import PARSERS
 class ParanaSpider(Spider):
     name = "parana"
     allowed_domains = ["desaparecidosdobrasil.org"]
+    api_client = APIClientIBGE("Paraná")
 
     def request_offset(self, offset: int) -> Request:
         base_url = "http://www.desaparecidosdobrasil.org/criancas-desaparecidas/parana/"
@@ -52,9 +54,21 @@ class ParanaSpider(Spider):
                 )
                 kwargs["age_at_occurrence"] = missing_since.year - dob.year
 
+            kwargs = self.clean_city(kwargs)
+
             yield Case(
                 name=name,
                 url=response.urljoin(href),
                 full_text="\n".join(contents),
                 **kwargs,
             )
+
+    def clean_city(self, kwargs):
+        if kwargs.get("last_seen_at"):
+            sigla = self.api_client.states["sigla"]
+            city = self.api_client.search_city(kwargs["last_seen_at"])
+
+            if city:
+                name_city = city["nome"]
+                kwargs["last_seen_at"] = f"{name_city} - {sigla}"
+        return kwargs

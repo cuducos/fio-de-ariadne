@@ -17,6 +17,7 @@ python-decouple = "^3.3"
 restless = "^2.1.1"
 scrapy = "^2.0.1"
 whitenoise = {extras = ["brotli"], version = "^5.0.1"}
+requests = "^2.23.0"
 
 [tool.poetry.dev-dependencies]
 createnv = "^0.0.1"
