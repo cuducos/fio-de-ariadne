@@ -61,8 +61,19 @@ class Kid(Model):
     # optional fields
     mother = CharField("Mãe", max_length=255, null=True, blank=True)
     father = CharField("Pai", max_length=255, null=True, blank=True)
-    last_seen_at = CharField(
-        "Local onde foi vista(o) pela última vez", max_length=255, null=True, blank=True
+    last_seen_at_city = CharField(
+        "Cidade onde foi vista(o) pela última vez",
+        max_length=255,
+        null=True,
+        blank=True,
+        db_index=True,
+    )
+    last_seen_at_state = CharField(
+        "UF onde foi vista(o) pela última vez",
+        max_length=2,
+        null=True,
+        blank=True,
+        db_index=True,
     )
     age_at_occurrence = IntegerField("Idade quando desapareceu", null=True, blank=True)
 

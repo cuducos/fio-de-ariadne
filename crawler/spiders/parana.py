@@ -54,8 +54,9 @@ class ParanaSpider(IbgeSpider):
                 )
                 kwargs["age_at_occurrence"] = missing_since.year - dob.year
 
-            last_seen_at = str(kwargs['last_seen_at']) if kwargs['last_seen_at'] else ''
-            kwargs['last_seen_at'] = self.normalize_city_for(last_seen_at)
+            last_seen_at = kwargs.pop("last_seen_at")
+            last_seen_at = str(last_seen_at) if last_seen_at else ""
+            kwargs.update(self.normalize_city_for(last_seen_at))
 
             yield Case(
                 name=name,

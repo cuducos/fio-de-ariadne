@@ -1,5 +1,5 @@
 from re import IGNORECASE, match
-from typing import Tuple
+from typing import Dict, Tuple
 from unicodedata import category, normalize
 
 from requests import get
@@ -7,16 +7,15 @@ from scrapy import Spider
 
 
 class IbgeSpider(Spider):
-    """Implements a `self.cities` tuple with names for cities of a given state
-    (defined by `self.abbr` in the class that inherits from this one) and a
-    `normalize_city_and_state_for` method."""
+    """Implements a `self.cities` dictionary with names for cities of a given
+    state (defined by `self.abbr` in the class that inherits from this one) and
+    a `normalize_city_and_state_for` method."""
 
     URL = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.cities = self.get_cities()
-        self._cities = {self.as_slug(city): city for city in self.cities}
+        self.cities = {self.as_slug(city): city for city in self.get_cities()}
 
     @staticmethod
     def as_slug(value: str) -> str:
@@ -57,13 +56,19 @@ class IbgeSpider(Spider):
         self.logger.info(f"Saving {len(cities)} cities from {self.state}")
         return cities
 
-    def normalize_city_for(self, value: str) -> str:
+    def normalize_city_for(self, value: str) -> Dict[str, str]:
         slug = self.as_slug(value)
-        matches = (match(city, slug, IGNORECASE) for city in self._cities)
+        matches = (match(city, slug, IGNORECASE) for city in self.cities)
         cities = sorted((m.group(0) for m in matches if m), key=len, reverse=True)
 
         if not cities:
-            return value
+            return {
+                "last_seen_at_city": value,
+                "last_seen_at_state": self.state,
+            }
 
         city, *_ = cities
-        return f"{self._cities[city]} - {self.state}"
+        return {
+            "last_seen_at_city": self.cities[city],
+            "last_seen_at_state": self.state,
+        }

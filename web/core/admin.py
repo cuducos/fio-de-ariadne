@@ -14,14 +14,16 @@ class KidModelAdmin(admin.ModelAdmin):
         "eyes_display",
         "hair_display",
         "skin_display",
-        "last_seen_at",
+        "last_seen_at_city",
+        "last_seen_at_state",
         "age_at_occurrence",
     )
     list_filter = (
         "eyes",
         "hair",
         "skin",
-        "last_seen_at",
+        "last_seen_at_city",
+        "last_seen_at_state",
         "age_at_occurrence",
     )
 
