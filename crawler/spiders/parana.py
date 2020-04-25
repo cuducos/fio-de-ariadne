@@ -1,18 +1,18 @@
 from datetime import datetime
 from typing import Iterator, Union
 
-from scrapy import Request, Spider
+from scrapy import Request
 from scrapy.http import Response
 
-from crawler.clients.ibge import APIClientIBGE
 from crawler.items import Case
+from crawler.spiders import IbgeSpider
 from crawler.text import PARSERS
 
 
-class ParanaSpider(Spider):
+class ParanaSpider(IbgeSpider):
     name = "parana"
-    allowed_domains = ["desaparecidosdobrasil.org"]
-    api_client = APIClientIBGE("Paraná")
+    abbr = "PR"
+    allowed_domains = ["desaparecidosdobrasil.org", "servicodados.ibge.gov.br"]
 
     def request_offset(self, offset: int) -> Request:
         base_url = "http://www.desaparecidosdobrasil.org/criancas-desaparecidas/parana/"
@@ -54,7 +54,8 @@ class ParanaSpider(Spider):
                 )
                 kwargs["age_at_occurrence"] = missing_since.year - dob.year
 
-            kwargs = self.clean_city(kwargs)
+            last_seen_at = str(kwargs['last_seen_at']) if kwargs['last_seen_at'] else ''
+            kwargs['last_seen_at'] = self.normalize_city_for(last_seen_at)
 
             yield Case(
                 name=name,
@@ -62,13 +63,3 @@ class ParanaSpider(Spider):
                 full_text="\n".join(contents),
                 **kwargs,
             )
-
-    def clean_city(self, kwargs):
-        if kwargs.get("last_seen_at"):
-            sigla = self.api_client.states["sigla"]
-            city = self.api_client.search_city(kwargs["last_seen_at"])
-
-            if city:
-                name_city = city["nome"]
-                kwargs["last_seen_at"] = f"{name_city} - {sigla}"
-        return kwargs
