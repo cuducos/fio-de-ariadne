@@ -26,3 +26,5 @@ jobs:
         env:
           SECRET_KEY: my-secret
           DATABASE_URL: "sqlite:///:memory:"
+          DEFAULT_FILE_STORAGE: django.core.files.storage.FileSystemStorage
+          STATICFILES_STORAGE: django.contrib.staticfiles.storage.StaticFilesStorage

@@ -1,14 +1,19 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from web.core.models import Kid
+from web.core.models import Kid, KidImage
+
+
+class KidImageInline(admin.TabularInline):
+    model = KidImage
+    fields = ("image",)
 
 
 class KidModelAdmin(admin.ModelAdmin):
-
     list_display = (
         "name",
         "original",
+        "first_image",
         "dob",
         "missing_since",
         "eyes_display",
@@ -26,6 +31,7 @@ class KidModelAdmin(admin.ModelAdmin):
         "last_seen_at_state",
         "age_at_occurrence",
     )
+    inlines = (KidImageInline,)
 
     def original(self, obj):
         label = "Ver link original"
@@ -41,9 +47,18 @@ class KidModelAdmin(admin.ModelAdmin):
     def skin_display(self, obj):
         return obj.get_skin_display()
 
+    def first_image(self, obj):
+        image = KidImage.objects.filter(kid=obj).first()
+        if not image:
+            return
+
+        html = f'<img src="{image.image.url}" style="max-width: 128px; height: auto" />'
+        return mark_safe(html)
+
     eyes_display.short_description = "Cor dos olhos"
     hair_display.short_description = "Cor dos cabelos"
     skin_display.short_description = "Cor da pele"
+    first_image.short_description = "Foto"
 
 
 admin.site.register(Kid, KidModelAdmin)

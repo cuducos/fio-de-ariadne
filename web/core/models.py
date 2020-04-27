@@ -1,6 +1,13 @@
+from pathlib import Path
+from uuid import uuid4
+
+from django.core.validators import FileExtensionValidator
 from django.db.models import (
+    CASCADE,
     CharField,
     DateField,
+    FileField,
+    ForeignKey,
     IntegerChoices,
     IntegerField,
     Model,
@@ -8,6 +15,11 @@ from django.db.models import (
     URLField,
 )
 from django.utils.translation import gettext_lazy as _
+
+
+def get_file_name_in_storage(instance, filename):
+    name = f"{uuid4()}-{filename}"
+    return Path(instance._meta.model_name) / str(instance.kid.id) / name
 
 
 class Kid(Model):
@@ -83,3 +95,21 @@ class Kid(Model):
 
     def __str__(self):
         return self.name
+
+
+class KidImage(Model):
+    kid = ForeignKey(Kid, on_delete=CASCADE, verbose_name="criança")
+    image = FileField(
+        verbose_name="Foto",
+        upload_to=get_file_name_in_storage,
+        validators=(
+            FileExtensionValidator(allowed_extensions=("jpg", "jpeg", "png", "gif")),
+        ),
+    )
+
+    def __str__(self):
+        return self.kid.name
+
+    class Meta:
+        verbose_name = "foto"
+        verbose_name_plural = "fotos"
