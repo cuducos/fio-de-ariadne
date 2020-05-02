@@ -15,4 +15,5 @@ COPY setup.cfg setup.cfg
 COPY crawler/ crawler/
 COPY web/ web/
 
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["poetry", "run"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
